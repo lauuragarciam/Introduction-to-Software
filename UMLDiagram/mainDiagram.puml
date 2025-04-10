@@ -1,0 +1,29 @@
+@startuml
+left to right direction
+actor "book giver" as bg
+actor "book taker" as bt
+rectangle "Book Platform" {
+  usecase "Finding the nearest Book Sharing Box" as UC1
+  usecase "Searching for a specific book" as UC2
+  usecase "Find Books in a specific Box" as UC3
+  usecase "Getting Information About the Book Taker" as UC4
+  usecase "Be notified about no availability of a book" as UC5
+  usecase "Reporting a problem" as UC6
+}
+
+bg --> UC1
+bt --> UC1
+bt --> UC2
+bt --> UC3
+bg --> UC4
+
+UC3 ..> UC1 : <<extend>>
+UC6 ..> UC2 : <<extend>>
+UC6 ..> UC1 : <<extend>>
+UC5 ..> UC3 : <<extend>>
+UC5 ..> UC2 : <<extend>>
+
+
+
+
+@enduml

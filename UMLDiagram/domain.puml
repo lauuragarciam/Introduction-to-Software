@@ -1,7 +1,6 @@
 @startuml
 
-class User {
-  +userID
+class Person {
   +name
   +email
   +location
@@ -14,21 +13,24 @@ class BookGiver {
 }
 
 class BookBox {
-  +boxID
-  +location
+  +boxName
+  +location : Location 
+  isFull : boolean
+}
+
+class Location {
+    latitude
+    longitude
 }
 
 class Book {
-  +bookID
   +title
-  +author
-  +genre
+  +authorName : string[1..*]
+  +genre : string[1..*]
   +status
   +ISBN
 }
 
-class Platform {
-}
 
 class Donation {
   +donationDate
@@ -41,15 +43,10 @@ class Feedback {
 }
 
 
-class Notification {
-  +message
-}
-
 class ProblemReport {
   +description
-  +timestamp
   +status
-  +reportID
+  +reportTime
 }
 
 class MaintenanceTeam {
@@ -58,35 +55,35 @@ class MaintenanceTeam {
 class Route {
   +startLocation
   +endLocation
-  +directions
+  +directions : Path
   +estimatedTime
   +distance
 }
 
+class Path {
 
-User <|-- BookTaker
-User <|-- BookGiver
+}
+
+Person <|-- BookTaker
+Person <|-- BookGiver
 
 
 BookBox "1" o-- "0..*" Book : contains
 
-Platform --> Notification : triggers
-Platform --> BookBox : retrieves data from
-Platform --> Route : generates
-User --> Route : uses
-Route --> BookBox
-User --> BookBox : navigates to
 
-BookGiver --> Book : donates
+Person --> Route : uses
+Route --> BookBox
+Person --> BookBox : navigates to
+
+Donation --> Book : donates
 BookGiver --> Donation : creates
 Donation --> BookBox : toBox
 
 BookTaker --> Feedback : provides
 Feedback --> Book : about
 
-User --> ProblemReport : submits
+Person --> ProblemReport : submits
 ProblemReport --> BookBox : for
-Platform --> MaintenanceTeam : notifies
-MaintenanceTeam --> ProblemReport : handles
+MaintenanceTeam --> ProblemReport : handled
 
 @enduml

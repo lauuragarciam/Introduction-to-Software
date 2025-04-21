@@ -1,9 +1,9 @@
 @startuml
 
 class Person {
-  +name
-  +email
-  +location
+  name
+  email
+  location
 }
 
 class BookTaker {
@@ -13,8 +13,8 @@ class BookGiver {
 }
 
 class BookBox {
-  +boxName
-  +location : Location 
+  boxName
+  location : Location 
   isFull : boolean
 }
 
@@ -24,40 +24,40 @@ class Location {
 }
 
 class Book {
-  +title
-  +authorName : string[1..*]
-  +genre : string[1..*]
-  +status
-  +ISBN
+  title
+  authorName : string[1..*]
+  genre : string[1..*]
+  status
+  ISBN
 }
 
 
 class Donation {
-  +donationDate
-  +status
-  +donateBookID
+  donationDate
+  status
+  donateBookID
 }
 
 class Feedback {
-  +reasonText
+  reasonText
 }
 
 
 class ProblemReport {
-  +description
-  +status
-  +reportTime
+  description
+  status
+  reportTime
 }
 
 class MaintenanceTeam {
 }
 
 class Route {
-  +startLocation
-  +endLocation
-  +directions : Path
-  +estimatedTime
-  +distance
+  startLocation
+  endLocation
+  directions : Path
+  estimatedTime
+  distance
 }
 
 class Path {

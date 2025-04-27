@@ -1,0 +1,15 @@
+@startuml
+start
+
+:Book taker selects a box;
+:System retrieves books from the selected box;
+
+if (Books available?) then (yes)
+  :System displays list of books (title, author, genre);
+  :Book taker browses and views book details;
+else (no)
+  :System informs that the box is empty;
+endif
+
+stop
+@enduml

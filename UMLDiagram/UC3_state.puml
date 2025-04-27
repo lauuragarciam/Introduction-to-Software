@@ -1,0 +1,17 @@
+@startuml
+
+hide empty description
+state "Viewing Box Contents" as ViewingBoxContents
+state "Displaying Book List" as DisplayingBookList
+state "Showing Empty Box Message" as ShowingEmptyBoxMessage
+state "Browsing Book Details" as BrowsingBookDetails
+
+[*] -r-> ViewingBoxContents
+
+ViewingBoxContents --> DisplayingBookList : box has books
+ViewingBoxContents -r-> ShowingEmptyBoxMessage : box is empty
+
+DisplayingBookList -r-> BrowsingBookDetails : book taker selects a book
+BrowsingBookDetails --> ViewingBoxContents : book taker goes back
+ShowingEmptyBoxMessage --> [*]
+@enduml

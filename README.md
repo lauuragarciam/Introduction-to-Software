@@ -1,4 +1,4 @@
-# Vision 
+# The Shared Library
 
 Our software connects book givers and collectors, making it easier to declutter bookshelves while giving books a second life.
 It allows users to search for books by author, theme, or type, and locate the nearest sharing box—promoting free access to knowledge and culture. 

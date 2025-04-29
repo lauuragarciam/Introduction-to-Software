@@ -1,0 +1,63 @@
+https://www.plantuml.com/plantuml/uml/ZLJDZjD03BxdANpSVONcm4BH2YuBOiK3k8cJZfZOqTXPchSdZak8eAeuj9qP-_kPRwm-gM6nQSZLkgYgmtUb0ecXAy86qa6B0_RKmaakTNNuCXA3dGbm79Vj2xwb7et010PSJghKmSCH6LeoAaDYWiaPipHeIVZTewCP7cRInmhWy37fc766d7ILOy9ocbsDjAueAy43ozhwjSWmsgB34sPGmjASQo-yhijh8Sz-vZO-o0KwcRZzMtIJNNNSAgQi3jlhEV5PVWAL8WMGMw1BidgjgCdexTochehlQh6HgJ6NseVcqHGQfIpG8Bpg-MrrXMpf7iyYIdyGW30MEMKQwcgpxFpNSYV5AyyfPqZibJYAPtXUbj0icMKo-YVur-aqf71xrTXiHdnhWseI1fsQXbIxAT-8yYZSfKL9jtvd28uNiTJDC61Y8qPkw1wNizr06E4GbBldYUvlP6K6Tangq3RjK8_gVS7xaZT47V6PFUQOR1yCdVgUr02pKM6qz4RG21isjh6iGxAjRi_QBiCOkq37DQDebhZVNkf_RthdeUv7u8D-C_hmsoN675PX85NiwJTd87VtZTyzp-5Jwizv-HYiXhXV22ctMdlnlVw8X4ssATwD-5KXMCFdqxBn_x9V
+
+
+@startuml
+start
+
+:User in front of damaged box;
+:Open the app;
+:Navigate to map;
+
+if (Can determine user location?) then (yes)
+  :Display list of nearby boxes;
+else (no)
+  :Prompt manual search;
+  :Search manually;
+  if (Box found?) then (yes)
+    :Display box details;
+  else (no)
+    :Show error and exit;
+    stop
+  endif
+endif
+
+:Select the damaged box to report;
+:Show details of selected box;
+:Choose to report a problem;
+:Display the report form;
+:Fill in the form;
+
+if (Form complete?) then (yes)
+  :Submit the problem report;
+  if (Submission successful?) then (yes)
+    :Confirm submission;
+    if (Notify maintenance successful?) then (yes)
+      :Notify maintenance team;
+    else (no)
+      :Retry notification;
+      if (Retry successful?) then (yes)
+        :Notify maintenance team;
+      else (no)
+        :Inform user and suggest alternative contact;
+      endif
+    endif
+  else (no)
+    :Show submission error;
+    :Retry submitting report;
+    if (Retry successful?) then (yes)
+      :Confirm submission;
+      :Notify maintenance team;
+stop
+    else (no)
+      :Show final error message;
+      stop
+    endif
+  endif
+else (no)
+  :Highlight missing fields;
+  :Ask user to complete the form;
+  stop
+endif
+
+stop
+@enduml

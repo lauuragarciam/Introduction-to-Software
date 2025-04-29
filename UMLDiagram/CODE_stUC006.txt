@@ -1,0 +1,56 @@
+//www.plantuml.com/plantuml/png/RPFDRjGm4CVlynIZFI9Lt7j0LQaga2Yjkd127BpEP6FLiIDx5jWRxy0RyYGuavquIRbv_lER3zipDvbDubFlWHrxmcSQOc8qU6TwSwG6R-Cl_Flx3-xPCE63iPqB1D2vXf3wWS_OKBR93UnY0CY2xJx4dl2f9DYXoVYnyQIUsnH_PXUE9TKWJXKKU33XP3pkoIJR2J4faw1KQQiWdYnJ8r0Hr5RcpkN1c_DORCJlY8tpMUcBgV3xBiQn3Ns1HxcGmEgQfFzalu-f5t8ygF_UURzsJiAIsPyElMEkPGMiwehBkLJ7U-FyvSfLdKIbducJz5K1uLLNxdDarpfhU9EtwjlCZsrBQSeyQBjwdX_I14jUSytMx8xzu8dLhHR0jpVVyUhgdGmBNkFNJ0dZG27Zu0stuwk1-4P8XqR1O7wues7Ao15xCm0eCU5rE4h4ftYvSqCisXfUZjkI3f6nZQVGm99udN-qCAlP2-lF00j8WkeCbfZzEJFrcBlI21vAWcPoGQKaQ3sBUdthdNt9k9ktzod5WwT-1nk-f921h1MRQOmpSaSulR80XQoVDzSH8UEGegMSOGO47t_mMlV7gglcMsw0PcoBbD65MbuX3QhRe35Pb8n9AW5KGWBccIfytO0IPSUUsvFV16psIEA-aEs2iyOZfHGJm9QHm7dHhgSZSdB78oLgG5sRAsoRNU-QLb-AbmRMd7QWkpStq4wkj-NW_S7O5unjAmqfkNeXWFdu-WTDQ30iEx4N5k26GdFgFVm3
+
+
+
+@startuml
+title Report a Damaged Box – State Machine
+
+hide empty description
+
+state "Home Page" as Idle
+state "Browsing Map" as Browsing
+state "Manual Search" as ManualSearch
+state "Box Selected" as BoxSelected
+state "Displaying Box Details" as BoxDetails
+state "Choosing Report Option" as ChoosingOption
+state "Displaying Form" as Form
+state "Filling Form" as FillingForm
+state "Submitting Report" as Submitting
+state "Submission Failed" as SubmissionFailed
+state "Retrying Submission" as Retrying
+state "Notification Failed" as NotificationFailed
+state "Offering Support" as Support
+state "Cancelled" as Cancelled
+state "Completed" as Completed
+
+[*] --> Idle : User opens platform
+
+Idle --> Browsing : User navigates to map
+
+Browsing --> BoxSelected : Location detected
+Browsing --> ManualSearch : Location not found
+ManualSearch --> BoxSelected : Box selected manually
+
+BoxSelected --> BoxDetails : System shows box details
+BoxDetails --> ChoosingOption : User clicks "Report a Problem"
+ChoosingOption --> Form : System displays the form
+
+Form --> Cancelled : User cancels process
+Cancelled --> [*] : Report cancelled
+
+Form --> FillingForm : User fills in the form
+FillingForm --> Submitting : User submits report
+
+Submitting --> Completed : Submission successful
+Submitting --> SubmissionFailed : Technical error
+
+SubmissionFailed --> Retrying : Retry triggered
+Retrying --> Submitting
+
+Submitting --> NotificationFailed : Notification error
+NotificationFailed --> Support : Retry failed / fallback offered
+Support --> Completed
+
+Completed --> [*] : Report and notification complete
+
+@enduml

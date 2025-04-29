@@ -1,0 +1,43 @@
+@startuml
+title Select a Book – State Machine
+
+hide empty description
+
+state "Home Page" as Idle
+state "Requesting Location" as RequestLocation
+state "Manual Location Input" as ManualLocation
+state "Entering Book Info" as EnterBookInfo
+state "Searching for Book" as SearchingBook
+state "Suggesting Alternatives" as SuggestingAlternatives
+state "Browsing Alternatives" as BrowsingAlternatives
+state "Searching Boxes" as SearchingBoxes
+state "Displaying Boxes" as DisplayingBoxes
+state "Box Selected" as BoxSelected
+state "Process Cancelled" as Cancelled
+state "Selection Completed" as Completed
+
+[*] --> Idle : Book Taker opens platform
+
+Idle --> RequestLocation : System requests location
+
+RequestLocation --> EnterBookInfo : Location available
+RequestLocation --> ManualLocation : Location denied
+ManualLocation --> EnterBookInfo : Manual input done
+
+EnterBookInfo --> SearchingBook : User submits book info
+SearchingBook --> SearchingBoxes : Book found
+SearchingBook --> SuggestingAlternatives : Book not found
+
+SuggestingAlternatives --> BrowsingAlternatives : User views suggestions
+BrowsingAlternatives --> EnterBookInfo : User picks new book
+BrowsingAlternatives --> Cancelled : User not interested
+
+SearchingBoxes --> DisplayingBoxes : Matches found
+
+DisplayingBoxes --> BoxSelected : User selects a box
+BoxSelected --> Completed : Box selection confirmed
+
+Cancelled --> [*] : Process terminated
+Completed --> [*] : Ready to pick up the book
+
+@enduml

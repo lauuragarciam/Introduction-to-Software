@@ -1,0 +1,32 @@
+@startuml
+start
+
+:Book Taker is on home page;
+
+if (Can determine Book Taker location?) then (yes)
+else (no)
+  :Manual input of location;
+endif
+
+:Book taker enters the required 
+  information of the desired book;
+  
+if (Is the book available?) then (yes)
+else (no)
+  :System suggests similar books;
+  if(Is Book Taker interested in another book?) then (yes)
+  :Select one book;
+  else(no)
+  stop
+  endif
+endif
+
+:System searches for matches in nearby boxes;
+
+:System displays a list or map with boxes that contain the book;
+
+:Select a box;
+
+
+stop
+@enduml

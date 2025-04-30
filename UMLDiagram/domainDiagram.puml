@@ -67,7 +67,6 @@ class Path {
 Person <|-- BookTaker
 Person <|-- BookGiver
 
-
 BookBox "1" o-- "0..*" Book : contains
 
 
@@ -75,9 +74,9 @@ Person --> Route : uses
 Route --> BookBox
 Person --> BookBox : navigates to
 
-Donation --> Book : donates
-BookGiver --> Donation : creates
-Donation --> BookBox : toBox
+BookGiver "1" -- "0..*" Donation
+BookBox "1" -- "0..*" Donation
+Book "1" -- "0..1" Donation
 
 BookTaker --> Feedback : provides
 Feedback --> Book : about

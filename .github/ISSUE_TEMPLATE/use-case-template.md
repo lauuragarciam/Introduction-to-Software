@@ -36,7 +36,12 @@ assignees: ''
 ## Postconditions:
 - list post cond
 
-The book taker has found the list of available books in the selected box.
+## Activity Diagram
 
-If needed, the book taker visits the box to pick up a book.
+![Activity Diagram](link)
 
+## State Machine Diagram
+![State Machine Diagram](link)
+
+## Wireframe
+![Wireframe](link)
